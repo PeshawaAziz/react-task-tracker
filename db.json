@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "text": "bruh",
+      "day": "never",
+      "reminder": true,
+      "id": 1
+    },
+    {
+      "text": "wow",
+      "day": "always",
+      "reminder": true,
+      "id": 2
+    },
+    {
+      "text": "new task",
+      "day": "sometime",
+      "reminder": false,
+      "id": 3
+    }
+  ]
+}
