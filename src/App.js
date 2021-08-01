@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./components/Header";
 import AddTaskForm from "./components/AddTaskForm";
 import Tasks from "./components/Tasks";
+import Footer from "./components/Footer";
+import About from "./components/About";
+import Button from "./components/Button";
 
 function App() {
     const [showAddTaskForm, setShowAddTaskForm] = useState(false);
@@ -80,29 +84,45 @@ function App() {
     }
 
     return (
-        <div className="d-flex justify-content-center">
-            <div className="card container w-600">
-                <Header
-                    title="Task Tracker"
-                    onAdd={() => {
-                        setShowAddTaskForm(!showAddTaskForm);
-                    }}
-                    showForm={showAddTaskForm}
-                />
-                {showAddTaskForm && <AddTaskForm onSubmit={addTask} />}
-                {tasks.length ? (
-                    <Tasks
-                        tasks={tasks}
-                        onClick={removeTask}
-                        onDoubleClick={toggleReminder}
+        <Router>
+            <div className="d-flex justify-content-center">
+                <div className="card container w-600">
+                    <Header
+                        title="Task Tracker"
+                        onAdd={() => {
+                            setShowAddTaskForm(!showAddTaskForm);
+                        }}
+                        showForm={showAddTaskForm}
                     />
-                ) : (
-                    <h4 className="text-muted font-weight-light">
-                        "Hooray! No tasks!"
-                    </h4>
-                )}
+                    <Route
+                        path="/"
+                        exact
+                        render={() => {
+                            return (
+                                <>
+                                    {showAddTaskForm && (
+                                        <AddTaskForm onSubmit={addTask} />
+                                    )}
+                                    {tasks.length ? (
+                                        <Tasks
+                                            tasks={tasks}
+                                            onClick={removeTask}
+                                            onDoubleClick={toggleReminder}
+                                        />
+                                    ) : (
+                                        <h4 className="text-muted font-weight-light">
+                                            "Hooray! No tasks!"
+                                        </h4>
+                                    )}
+                                    <Footer />
+                                </>
+                            );
+                        }}
+                    />
+                    <Route path="/about" component={About} />
+                </div>
             </div>
-        </div>
+        </Router>
     );
 }
 
