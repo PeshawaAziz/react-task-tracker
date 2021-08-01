@@ -1,19 +1,20 @@
 import Button from "./Button";
 
-function Header({ title }) {
-  const onClick = () => {
-    console.log("Hello!");
-  };
-  return (
-    <header className="header d-flex justify-content-between align-items-center">
-      <h1>{title}</h1>
-      <Button className="btn btn-lg" text="Add" onClick={onClick} />
-    </header>
-  );
+function Header({ title, onAdd, showForm }) {
+    return (
+        <header className="header d-flex justify-content-between align-items-center">
+            <h1>{title}</h1>
+            <Button
+                className={`btn btn-lg ${showForm && "btn-danger"}`}
+                text={showForm ? "Hide" : "Show"}
+                onClick={onAdd}
+            />
+        </header>
+    );
 }
 
 Header.defaultProps = {
-  title: "Header",
+    title: "Header",
 };
 
 export default Header;
